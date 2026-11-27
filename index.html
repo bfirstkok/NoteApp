@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📝 บันทึกของฉัน</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>📝 บันทึกของฉัน</h1>
+      <button id="btn-new" title="สร้างบันทึกใหม่">+ ใหม่</button>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="search" placeholder="🔍 ค้นหาบันทึก..." />
+    </div>
+
+    <div class="category-filter">
+      <select id="filter-category">
+        <option value="">📂 ทุกหมวด</option>
+      </select>
+    </div>
+
+    <ul id="note-list"></ul>
+
+    <div class="sidebar-footer">
+      <span id="note-count">0 บันทึก</span>
+      <button id="btn-export" title="ส่งออกทั้งหมดเป็น JSON">⬇ Export</button>
+      <label id="btn-import-label" title="นำเข้า JSON">
+        ⬆ Import
+        <input type="file" id="btn-import" accept=".json" hidden />
+      </label>
+    </div>
+  </aside>
+
+  <!-- Editor -->
+  <main class="editor-area" id="editor-area">
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">📄</div>
+      <p>เลือกบันทึก หรือกด <strong>+ ใหม่</strong> เพื่อเริ่มต้น</p>
+    </div>
+
+    <div class="editor-wrapper" id="editor-wrapper" hidden>
+      <div class="editor-toolbar">
+        <input type="text" id="note-title" placeholder="หัวข้อบันทึก..." />
+        <div class="toolbar-right">
+          <select id="note-category">
+            <option value="ทั่วไป">📂 ทั่วไป</option>
+            <option value="งาน">💼 งาน</option>
+            <option value="ส่วนตัว">👤 ส่วนตัว</option>
+            <option value="ไอเดีย">💡 ไอเดีย</option>
+            <option value="สิ่งที่ต้องทำ">✅ สิ่งที่ต้องทำ</option>
+          </select>
+          <span class="color-label">สี:</span>
+          <div class="color-picker" id="color-picker">
+            <button class="color-btn" data-color="#ffffff" style="background:#ffffff" title="ขาว"></button>
+            <button class="color-btn" data-color="#fff9c4" style="background:#fff9c4" title="เหลือง"></button>
+            <button class="color-btn" data-color="#f8d7da" style="background:#f8d7da" title="แดง"></button>
+            <button class="color-btn" data-color="#d4edda" style="background:#d4edda" title="เขียว"></button>
+            <button class="color-btn" data-color="#cce5ff" style="background:#cce5ff" title="น้ำเงิน"></button>
+            <button class="color-btn" data-color="#e2d9f3" style="background:#e2d9f3" title="ม่วง"></button>
+          </div>
+          <button id="btn-delete" title="ลบบันทึก">🗑 ลบ</button>
+        </div>
+      </div>
+
+      <div class="format-bar">
+        <button data-cmd="bold" title="ตัวหนา"><b>B</b></button>
+        <button data-cmd="italic" title="ตัวเอียง"><i>I</i></button>
+        <button data-cmd="underline" title="ขีดเส้นใต้"><u>U</u></button>
+        <button data-cmd="strikeThrough" title="ขีดฆ่า"><s>S</s></button>
+        <span class="sep"></span>
+        <button data-cmd="insertUnorderedList" title="รายการสัญลักษณ์">• List</button>
+        <button data-cmd="insertOrderedList" title="รายการตัวเลข">1. List</button>
+        <span class="sep"></span>
+        <button data-cmd="justifyLeft" title="ชิดซ้าย">◀</button>
+        <button data-cmd="justifyCenter" title="กึ่งกลาง">◼</button>
+        <button data-cmd="justifyRight" title="ชิดขวา">▶</button>
+        <span class="sep"></span>
+        <select id="font-size" title="ขนาดตัวอักษร">
+          <option value="1">เล็กมาก</option>
+          <option value="2">เล็ก</option>
+          <option value="3" selected>ปกติ</option>
+          <option value="4">ใหญ่</option>
+          <option value="5">ใหญ่มาก</option>
+        </select>
+        <input type="color" id="text-color" title="สีตัวอักษร" value="#000000" />
+      </div>
+
+      <div
+        id="note-content"
+        class="note-content"
+        contenteditable="true"
+        spellcheck="false"
+        placeholder="เริ่มพิมพ์บันทึกของคุณที่นี่..."
+      ></div>
+
+      <div class="editor-status">
+        <span id="save-status">💾 บันทึกอัตโนมัติ</span>
+        <span id="word-count">0 คำ</span>
+        <span id="note-date"></span>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
